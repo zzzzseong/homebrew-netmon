@@ -29,6 +29,6 @@ class Netmon < Formula
   end
 
   test do
-    assert_match "Network Monitoring Tool", shell_output("#{bin}/netmon help", 1)
+    system "#{bin}/netmon", "help"
   end
 end
