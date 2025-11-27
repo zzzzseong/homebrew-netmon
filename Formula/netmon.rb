@@ -31,6 +31,33 @@ class Netmon < Formula
     generate_completions_from_executable(bin/"netmon", "completion")
   end
 
+  def post_install
+    # Automatically configure zsh completion
+    if ENV["SHELL"]&.include?("zsh") || File.exist?(File.expand_path("~/.zshrc"))
+      zshrc = File.expand_path("~/.zshrc")
+      brew_completion_block = <<~EOS
+
+        # Homebrew completion (added by netmon)
+        if type brew &>/dev/null; then
+          FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+          autoload -Uz compinit
+          compinit
+        fi
+      EOS
+      
+      # Check if Homebrew completion block already exists
+      zshrc_content = File.exist?(zshrc) ? File.read(zshrc) : ""
+      
+      unless zshrc_content.include?("FPATH=$(brew --prefix)/share/zsh/site-functions")
+        File.open(zshrc, "a") do |f|
+          f.puts brew_completion_block
+        end
+        ohai "Added Homebrew completion configuration to ~/.zshrc"
+        ohai "Run 'source ~/.zshrc' or restart your terminal to enable completion"
+      end
+    end
+  end
+
   test do
     system "#{bin}/netmon", "help"
   end
