@@ -26,6 +26,9 @@ class Netmon < Formula
 
   def install
     bin.install "netmon"
+    
+    # Generate and install shell completions
+    generate_completions_from_executable(bin/"netmon", "completion")
   end
 
   test do
