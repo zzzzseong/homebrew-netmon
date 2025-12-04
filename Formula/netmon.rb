@@ -33,8 +33,15 @@ class Netmon < Formula
 
   def post_install
     # Automatically configure zsh completion
-    if ENV["SHELL"]&.include?("zsh") || File.exist?(File.expand_path("~/.zshrc"))
+    begin
       zshrc = File.expand_path("~/.zshrc")
+      
+      # Check if zsh is being used or .zshrc exists
+      unless ENV["SHELL"]&.include?("zsh") || File.exist?(zshrc)
+        opoo "Skipping zsh completion configuration: zsh not detected"
+        return
+      end
+      
       brew_completion_block = <<~EOS
 
         # Homebrew completion (added by netmon)
@@ -48,13 +55,26 @@ class Netmon < Formula
       # Check if Homebrew completion block already exists
       zshrc_content = File.exist?(zshrc) ? File.read(zshrc) : ""
       
-      unless zshrc_content.include?("FPATH=$(brew --prefix)/share/zsh/site-functions")
-        File.open(zshrc, "a") do |f|
-          f.puts brew_completion_block
-        end
-        ohai "Added Homebrew completion configuration to ~/.zshrc"
-        ohai "Run 'source ~/.zshrc' or restart your terminal to enable completion"
+      if zshrc_content.include?("FPATH=$(brew --prefix)/share/zsh/site-functions")
+        ohai "Homebrew completion configuration already exists in ~/.zshrc"
+        return
       end
+      
+      # Append to .zshrc
+      File.open(zshrc, "a") do |f|
+        f.puts brew_completion_block
+      end
+      
+      ohai "Added Homebrew completion configuration to ~/.zshrc"
+      ohai "Run 'source ~/.zshrc' or restart your terminal to enable completion"
+    rescue => e
+      opoo "Failed to configure zsh completion: #{e.message}"
+      opoo "You can manually add the following to your ~/.zshrc:"
+      puts "  if type brew &>/dev/null; then"
+      puts "    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH"
+      puts "    autoload -Uz compinit"
+      puts "    compinit"
+      puts "  fi"
     end
   end
 
