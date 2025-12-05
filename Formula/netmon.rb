@@ -1,26 +1,26 @@
 class Netmon < Formula
   desc "Network monitoring CLI tool"
   homepage "https://github.com/zzzzseong/netmon"
-  version "1.2.1"
+  version "1.2.2"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/zzzzseong/netmon/releases/download/v1.2.1/netmon-darwin-amd64.tar.gz"
-      sha256 "adff60ab2baedcefdead42b25bd265044d3696e50343ff5ea0afc240788d86a9"
+      url "https://github.com/zzzzseong/netmon/releases/download/v1.2.2/netmon-darwin-amd64.tar.gz"
+      sha256 "31bdffe5223ac221f2681a28ab1353e8a48cfdfb3f1faffd8e09ee70a16ae726"
     elsif Hardware::CPU.arm?
-      url "https://github.com/zzzzseong/netmon/releases/download/v1.2.1/netmon-darwin-arm64.tar.gz"
-      sha256 "96c0974085285b362897d1677dfc3e0d5e1436e92ec897d3bc9d0c5954513f0d"
+      url "https://github.com/zzzzseong/netmon/releases/download/v1.2.2/netmon-darwin-arm64.tar.gz"
+      sha256 "b89c7efdfc0f45e299f2410bfb9adeb6828ea4f883ccfc368bb54d208e92d9a8"
     end
   end
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/zzzzseong/netmon/releases/download/v1.2.1/netmon-linux-amd64.tar.gz"
-      sha256 "5f4b193eb9535655eec397e299644ff5b12534c60c17d6e24c2f1ee915348e3c"
+      url "https://github.com/zzzzseong/netmon/releases/download/v1.2.2/netmon-linux-amd64.tar.gz"
+      sha256 "922e68a264e55543443a724e65d3f58a762aa33291738ade5e034d71906f193c"
     elsif Hardware::CPU.arm?
-      url "https://github.com/zzzzseong/netmon/releases/download/v1.2.1/netmon-linux-arm64.tar.gz"
-      sha256 "c75405fedde6b7cd66b81bc74d3d002424ae3534a405671c21c282988fa074e5"
+      url "https://github.com/zzzzseong/netmon/releases/download/v1.2.2/netmon-linux-arm64.tar.gz"
+      sha256 "3c4b86c469eba33c2ad07e0c44542eced15c353c1e1a9036962977eae3f9e992"
     end
   end
 
