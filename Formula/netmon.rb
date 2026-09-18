@@ -7,20 +7,20 @@ class Netmon < Formula
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/zzzzseong/netmon/releases/download/v1.7.0/netmon-darwin-amd64.tar.gz"
-      sha256 "177b5a906fbc714e31de4d691d831196e059402912c307b9512f4a38620e9e3a"
+      sha256 "232e471dc14e9c76a530a9e6fcccb6dfb9b632f6ac4c0cbcce1c713f434ffe87"
     elsif Hardware::CPU.arm?
       url "https://github.com/zzzzseong/netmon/releases/download/v1.7.0/netmon-darwin-arm64.tar.gz"
-      sha256 "9418a97841ecec28eb959e17f788ff8834a22d919424a1684a21fec68e23d070"
+      sha256 "cfdabb9f970bb6fdbde70fd245055171fac6d3980c1ecd96dcb28485704ed91e"
     end
   end
 
   on_linux do
     if Hardware::CPU.intel?
       url "https://github.com/zzzzseong/netmon/releases/download/v1.7.0/netmon-linux-amd64.tar.gz"
-      sha256 "01d44ad069383cd3f44569b7a384429ceb415ab6cd995a7d1bc837e1203a7aa9"
+      sha256 "bf59c943715f2e800e3758fd09f90b814d72aaee9e9e342d8eb6352af60adc47"
     elsif Hardware::CPU.arm?
       url "https://github.com/zzzzseong/netmon/releases/download/v1.7.0/netmon-linux-arm64.tar.gz"
-      sha256 "4555fc45b2c7d372667cff66661a0759909b38fe19fcd2be3ae74aaaa6ad6581"
+      sha256 "de86ecaa3b5ee2ec9d5859dba28e73871de4d657e61a4101e2c1c0469756ea10"
     end
   end
 
